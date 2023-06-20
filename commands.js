@@ -1,45 +1,27 @@
-import 'dotenv/config';
-import { getRPSChoices } from './game.js';
-import { capitalize, InstallGlobalCommands } from './utils.js';
-
-// Get the game choices from game.js
-function createCommandChoices() {
-  const choices = getRPSChoices();
-  const commandChoices = [];
-
-  for (let choice of choices) {
-    commandChoices.push({
-      name: capitalize(choice),
-      value: choice.toLowerCase(),
-    });
-  }
-
-  return commandChoices;
-}
+import 'dotenv/config'
+import { InstallGlobalCommands } from './utils.js'
 
 // Simple test command
 const TEST_COMMAND = {
-  name: 'test',
+  name: 'test2',
   description: 'Basic command',
   type: 1,
-};
+}
 
-// Command containing options
-const CHALLENGE_COMMAND = {
-  name: 'challenge',
-  description: 'Challenge to a match of rock paper scissors',
+const D4_COMMAND = {
+  name: 'diablo',
+  description: 'Get information about Diablo 4!',
   options: [
     {
-      type: 3,
-      name: 'object',
-      description: 'Pick your object',
-      required: true,
-      choices: createCommandChoices(),
+      name: 'breakpoints',
+      description: 'Gives information on the breakpoints of item level.',
+      type: 1
     },
   ],
-  type: 1,
-};
+}
 
-const ALL_COMMANDS = [TEST_COMMAND, CHALLENGE_COMMAND];
+const ALL_COMMANDS = [TEST_COMMAND, D4_COMMAND]
 
-InstallGlobalCommands(process.env.APP_ID, ALL_COMMANDS);
+InstallGlobalCommands(process.env.APP_ID, ALL_COMMANDS).then(() => {
+  console.log('Ermagherd, it worked!!')
+})
