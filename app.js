@@ -1,14 +1,13 @@
+import fs from 'fs'
 import 'dotenv/config'
 import express from 'express'
 import {
   InteractionType,
   InteractionResponseType,
-  InteractionResponseFlags,
-  MessageComponentTypes,
-  ButtonStyleTypes,
 } from 'discord-interactions'
-import { VerifyDiscordRequest, getRandomEmoji, DiscordRequest } from './utils.js'
-import breakpoints from './data/breakpoints.js'
+import { VerifyDiscordRequest, getRandomEmoji } from './utils.js'
+
+import { breakpoints } from './data/breakpoints.js'
 
 // Create an express app
 const app = express()
@@ -38,6 +37,17 @@ app.post('/interactions', async function (req, res) {
   if (type === InteractionType.APPLICATION_COMMAND) {
     const { name } = data
 
+    if (name === 'test2') {
+      const testResponse = fs.readFileSync('./data/test-response.txt', 'utf8')
+
+      return res.send({
+        type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+        data: {
+          content: testResponse,
+        },
+      })
+    }
+
     // "test" command
     if (name === 'diablo') {
       if (data.options[0]?.name === 'breakpoints') {
@@ -56,12 +66,21 @@ app.post('/interactions', async function (req, res) {
   }
 })
 
-function handleBreakpointsCommand(req, res) {
+function handleBreakpointsCommand (req, res) {
+  const breakpointResponse = fs.readFileSync('./data/breakpoints.txt', 'utf8')
+
   return res.send({
     type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
     data: {
-      content: ""
-    }
+      content: breakpointResponse,
+      embeds: [
+        {
+          title: 'Breakpoints',
+          color: 0x008800,
+          fields: breakpoints,
+        },
+      ],
+    },
   })
 }
 

@@ -1,0 +1,16 @@
+Item level determines the power of your items.
+The higher the item level, the more powerful the item is.
+
+Item levels are further divided into tiers.
+At certain (break)points, the affixes that roll on an item move into the next tier,
+having the potential to roll higher values.
+
+Nearly every affix in Diablo 4 abides by this breakpoint system, but there are some exceptions.
+An item's base DPS or Armor rating scales linearly with Item Power, they don't follow the breakpoint system.
+This also applies to HP and Thorn affixes on items.
+All other affixes abide by item level breakpoints.
+
+Item level can be increased by upgrading an item at the blacksmith.
+It can be useful to do so in order to get to the next breakpoint of an item you like.
+Note that while the range in which an affix can roll increases, ***it rerolls the value***, which may lead to a worse roll than it was before.
+Make sure to always *preview the upgrade* before upgrading it.
